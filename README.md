@@ -37,3 +37,16 @@ A V7 tem painel separado com slide atual, próximo slide, notas editáveis, cron
 Para atualizar a apresentação, use o pacote Windows **Radar-Unimed-V7-Publicacao-Protegida-Windows.zip** fornecido no ChatGPT. Execute o .bat, confirme a senha e faça upload **somente** de `docs/payload.bin` (substituindo o anterior). O secret `RADAR_PASSWORD` no GitHub Actions não define nem substitui a senha do arquivo gerado localmente.
 
 **Importante:** as edições das notas persistem somente durante a sessão. Use **Exportar roteiro** e **Importar roteiro**; o JSON exportado contém falas e deve ser tratado como arquivo interno, nunca adicionado ao repositório público.
+
+## Radar Live — V10 (celular vertical e QR sincronizado)
+
+A V10 adiciona uma segunda experiência de público em tela vertical, sincronizada com o telão. O arquivo completo da apresentação **não deve ser enviado em aberto** ao repositório público.
+
+Implantação: use os pacotes **Radar-Unimed-V10-Live.zip** (apresentação e Worker Cloudflare) e **Radar-Unimed-V10-Publicacao-Protegida-Windows.zip** (gerador do `docs/payload.bin` criptografado), disponíveis na conversa original do ChatGPT. O pacote completo inclui `cloudflare/IMPLANTAR-WINDOWS.bat` e `README-V10.md`.
+
+1. Implante o Worker `radar-unimed-live` como serviço **separado** e defina o secret Cloudflare `RADAR_LIVE_HOST_KEY` (não utilize `RADAR_PASSWORD`).
+2. Gere um **novo** `docs/payload.bin` a partir da V10 e atualize somente esse arquivo no GitHub.
+3. Abra o Pages, desbloqueie a apresentação, entre no Modo Apresentador e inicie o Radar Live informando URL do Worker e chave do apresentador.
+4. O QR exibido no slide inicial contém o convite de uma sala temporária; participantes entram no celular em posição vertical, sem acesso às notas do apresentador.
+
+Atenção: ativar o Pages **não** implanta automaticamente o Worker. O repositório pode já conter um `payload.bin` de versão anterior; verifique se foi atualizado antes de usar a V10. O QR concede acesso a quem possuir o convite e, por isso, não substitui autenticação individual.
