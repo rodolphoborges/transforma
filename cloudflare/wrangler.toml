@@ -1,0 +1,14 @@
+name = "radar-unimed-live"
+main = "src/index.js"
+compatibility_date = "2026-11-20"
+
+[[durable_objects.bindings]]
+name = "RADAR_ROOMS"
+class_name = "RadarRoom"
+
+[[migrations]]
+tag = "v1"
+new_sqlite_classes = ["RadarRoom"]
+
+[observability]
+enabled = false
