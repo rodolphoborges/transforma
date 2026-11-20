@@ -4,17 +4,17 @@ Este repositório é público, mas **a apresentação não deve ser armazenada a
 
 ## Arquitetura de acesso
 
-O site usa uma tela de desbloqueio que descriptografa `site/payload.bin` **no navegador** com uma senha compartilhada. O conteúdo protegido deve ser cifrado **antes** de qualquer commit, usando o utilitário `tools/encrypt.py`.
+O site usa uma tela de desbloqueio que descriptografa `docs/payload.bin` **no navegador** com uma senha compartilhada. O conteúdo protegido deve ser cifrado **antes** de qualquer commit, usando o utilitário `tools/encrypt.py`.
 
 **O arquivo `payload.bin` deve conter apenas conteúdo criptografado.** Não envie arquivos originais (`.html`, imagens, vídeos ou ZIP da V6) para este repositório, nem mesmo temporariamente, pois o GitHub mantém histórico de commits.
 
 ## Publicação
 
 1. Baixe a versão V6 do Radar em seu computador e extraia a pasta `radar-web-lite`.
-2. Execute `python tools/encrypt.py /caminho/para/radar-web-lite site/payload.bin` em ambiente local seguro.
+2. Execute `python tools/encrypt.py /caminho/para/radar-web-lite docs/payload.bin` em ambiente local seguro.
 3. Insira a mesma senha forte que será compartilhada com a equipe. O programa a solicita localmente e **não grava a senha em arquivo**.
-4. Envie **somente** o arquivo gerado `site/payload.bin` ao repositório.
-5. Configure o GitHub Pages para publicar a partir da pasta `site` da branch `main` (caso não esteja disponível, use o workflow de Pages ou copie `site/index.html` para a raiz).
+4. Envie **somente** o arquivo gerado `docs/payload.bin` ao repositório.
+5. Configure o GitHub Pages para publicar a partir da pasta `docs` da branch `main` (caso não esteja disponível, use o workflow de Pages ou copie `docs/index.html` para a raiz).
 
 Se você cadastrou o secret `RADAR_PASSWORD` no GitHub Actions, observe que **ele não está sendo usado pelo site**. Um secret de Actions não pode ser lido pelo navegador e não deve ser copiado para JavaScript. A senha utilizada pelo utilitário local é que desbloqueará o conteúdo.
 
