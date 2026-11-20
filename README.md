@@ -29,3 +29,11 @@ Se você cadastrou o secret `RADAR_PASSWORD` no GitHub Actions, observe que **el
 - O navegador baixa os bytes criptografados, valida a senha e carrega o documento descriptografado em memória.
 
 > **Atenção**: não há mecanismo de recuperação de senha. Guarde-a em um gerenciador de senhas e, se for trocada, gere e publique um novo `payload.bin`.
+
+## Modo Apresentador — V7
+
+A V7 tem painel separado com slide atual, próximo slide, notas editáveis, cronômetro, navegação por teclado, tela preta e pausa de efeitos. O botão **Abrir telão** abre uma segunda janela sincronizada, ideal para monitores em modo **Estender telas**. O GitHub Pages publica apenas a tela de senha e o arquivo cifrado; as notas fazem parte do conteúdo cifrado.
+
+Para atualizar a apresentação, use o pacote Windows **Radar-Unimed-V7-Publicacao-Protegida-Windows.zip** fornecido no ChatGPT. Execute o .bat, confirme a senha e faça upload **somente** de `docs/payload.bin` (substituindo o anterior). O secret `RADAR_PASSWORD` no GitHub Actions não define nem substitui a senha do arquivo gerado localmente.
+
+**Importante:** as edições das notas persistem somente durante a sessão. Use **Exportar roteiro** e **Importar roteiro**; o JSON exportado contém falas e deve ser tratado como arquivo interno, nunca adicionado ao repositório público.
