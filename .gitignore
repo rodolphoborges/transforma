@@ -1,0 +1,22 @@
+# Do not publish the unencrypted presentation (including media).
+radar-web-lite/
+radar-web/
+assets/
+*.mp4
+*.pptx
+*.zip
+*.png
+*.jpg
+*.jpeg
+*.webp
+*.mov
+*.html
+!docs/index.html
+!tools/*.html
+__pycache__/
+.env
+.env.*
+password*
+*.key
+*.pem
+# docs/payload.bin is the only encrypted content that may be published.
