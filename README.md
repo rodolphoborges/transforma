@@ -50,3 +50,11 @@ Implantação: use os pacotes **Radar-Unimed-V10-Live.zip** (apresentação e Wo
 4. O QR exibido no slide inicial contém o convite de uma sala temporária; participantes entram no celular em posição vertical, sem acesso às notas do apresentador.
 
 Atenção: ativar o Pages **não** implanta automaticamente o Worker. O repositório pode já conter um `payload.bin` de versão anterior; verifique se foi atualizado antes de usar a V10. O QR concede acesso a quem possuir o convite e, por isso, não substitui autenticação individual.
+
+## Apresentação final V11 (15 slides)
+
+A apresentação fonte de verdade é `Radar-de-Integridade-Assistencial-v11.pptx`, fornecida no chat de desenvolvimento. O site V11 foi reconstruído com 15 slides fiéis à composição visual do PowerPoint, 3 vídeos incorporados, notas de apresentação, texto acessível, leitura de descrições e Radar Live sincronizado. Os dados do celular e a navegação seguem essa nova sequência. O Worker mantém compatibilidade com a V10 de 18 slides usando o campo opcional `total`.
+
+**Importante:** por ser repositório público, o PowerPoint e o site em claro NÃO foram enviados ao GitHub. Para atualizar o site use o pacote local `Radar-Unimed-V11-Publicacao-Protegida-Windows.zip` fornecido na conversa, execute o .bat, e faça upload de **somente** `docs/payload.bin`, substituindo o antigo. Se quiser manter a senha de acesso já distribuída, utilize a mesma senha ao gerar o payload. A chave do apresentador `RADAR_LIVE_HOST_KEY` é independente.
+
+**Pendências editoriais no PPTX enviado:** slide 9 exibe itens idênticos nos lados Antes/Depois e slide 13 contém o marcador `FRASE DE IMPACTO`. Esses detalhes não foram preenchidos com informações hipotéticas. Os vídeos não oferecem faixas de legenda/transcrição revisadas na apresentação original. A geração e descriptografia do payload foram testadas; ainda requer teste visual em navegadores e teste ponta a ponta com Worker e celulares.
