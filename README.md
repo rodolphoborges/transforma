@@ -58,3 +58,11 @@ A apresentação fonte de verdade é `Radar-de-Integridade-Assistencial-v11.pptx
 **Importante:** por ser repositório público, o PowerPoint e o site em claro NÃO foram enviados ao GitHub. Para atualizar o site use o pacote local `Radar-Unimed-V11-Publicacao-Protegida-Windows.zip` fornecido na conversa, execute o .bat, e faça upload de **somente** `docs/payload.bin`, substituindo o antigo. Se quiser manter a senha de acesso já distribuída, utilize a mesma senha ao gerar o payload. A chave do apresentador `RADAR_LIVE_HOST_KEY` é independente.
 
 **Pendências editoriais no PPTX enviado:** slide 9 exibe itens idênticos nos lados Antes/Depois e slide 13 contém o marcador `FRASE DE IMPACTO`. Esses detalhes não foram preenchidos com informações hipotéticas. Os vídeos não oferecem faixas de legenda/transcrição revisadas na apresentação original. A geração e descriptografia do payload foram testadas; ainda requer teste visual em navegadores e teste ponta a ponta com Worker e celulares.
+
+## V11 — aparência homologada HUMAN-MD / Radar Cinematográfico
+
+A versão visual correta da V11 foi reconstruída a partir do pacote aprovado em 20/11/2026: **Radar-Cinematografico-Unimed-V5-Corrigido.zip**. O conteúdo continua sendo o PowerPoint final V11 (15 slides); a camada visual volta ao sistema homologado V5: verde/lima Unimed, Manrope + DM Mono, radar e partículas em canvas, escultura 3D, transições cinematográficas e animações ambientais discretas, sem faixa desfocada fixa no centro.
+
+Para publicar, use o pacote local **Radar-Unimed-V11-Visual-Homologado-Publicacao-Protegida-Windows.zip** entregue na conversa, execute `GERAR-ARQUIVO-CRIPTOGRAFADO.bat` e envie somente `docs/payload.bin`, substituindo o atual. O gerador agora incorpora todos os recursos da pasta `assets/` como data URIs antes da criptografia. Mantenha a senha já distribuída se quiser evitar nova comunicação ao público.
+
+O pacote preserva os 3 vídeos do PPTX V11, o Modo Apresentador, QR/Radar Live, a janela separada de telão e o aviso de orientação do celular. Não publique os arquivos abertos do pacote no repositório público.
