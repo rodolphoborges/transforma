@@ -28,7 +28,7 @@ small{font-weight:750;letter-spacing:.19em;color:#b8ff52;text-transform:uppercas
 <script>
 'use strict';
 const form=document.getElementById('unlock'),password=document.getElementById('password'),status=document.getElementById('status'),submit=document.getElementById('submit'),gate=document.getElementById('gate'),viewer=document.getElementById('viewer');
-let encrypted=null;
+let encrypted=null,presentationHtml=null,telao=null;
 async function loadPayload(){
  if(encrypted)return encrypted;
  const response=await fetch('./payload.bin',{cache:'no-store'});
@@ -46,7 +46,22 @@ form.addEventListener('submit',async event=>{
   const key=await crypto.subtle.deriveKey({name:'PBKDF2',salt,iterations:600000,hash:'SHA-256'},material,{name:'AES-GCM',length:256},false,['decrypt']);
   const plain=await crypto.subtle.decrypt({name:'AES-GCM',iv,tagLength:128},key,data);
   const html=new TextDecoder('utf-8',{fatal:true}).decode(plain);
-  password.value='';viewer.srcdoc=html;gate.style.display='none';viewer.style.display='block';document.body.style.display='block';
+  password.value='';presentationHtml=html;viewer.srcdoc=html;gate.style.display='none';viewer.style.display='block';document.body.style.display='block';
  }catch(err){status.textContent=err.message==='Apresentação criptografada ainda não foi publicada.'?err.message:'Não foi possível abrir. Verifique a senha e tente novamente.';}finally{submit.disabled=false}
+});
+// V12.3 · telão: the presentation runs in a sandboxed iframe, so this page opens the projector window
+// with the same (already decrypted) content and relays the sync messages between both.
+window.addEventListener('message',event=>{
+ const d=event.data;if(!d||d.source!=='radar-v12'||!presentationHtml)return;
+ if(event.source===viewer.contentWindow){
+  if(d.kind==='relay-open-telao'){
+   if(telao&&!telao.closed){telao.focus();return}
+   telao=window.open('','radar-v12-telao','width=1500,height=900');
+   if(!telao)return;
+   telao.document.open();
+   telao.document.write(presentationHtml.replace('<head>','<head><script>window.RADAR_TELAO=true<\/script>'));
+   telao.document.close();
+  }else if(d.kind==='relay'&&telao&&!telao.closed){telao.postMessage(d.msg,'*')}
+ }else if(telao&&event.source===telao){viewer.contentWindow.postMessage(d,'*')}
 });
 </script></body></html>

@@ -66,3 +66,30 @@ A versão visual correta da V11 foi reconstruída a partir do pacote aprovado em
 Para publicar, use o pacote local **Radar-Unimed-V11-Visual-Homologado-Publicacao-Protegida-Windows.zip** entregue na conversa, execute `GERAR-ARQUIVO-CRIPTOGRAFADO.bat` e envie somente `docs/payload.bin`, substituindo o atual. O gerador agora incorpora todos os recursos da pasta `assets/` como data URIs antes da criptografia. Mantenha a senha já distribuída se quiser evitar nova comunicação ao público.
 
 O pacote preserva os 3 vídeos do PPTX V11, o Modo Apresentador, QR/Radar Live, a janela separada de telão e o aviso de orientação do celular. Não publique os arquivos abertos do pacote no repositório público.
+
+## V12.3 — projeção, telão, narrações e pastas de mídia
+
+A V12.3 corrige a projeção (layout relativo ao palco 16:9, slide 12 reorganizado, telão rodando as mesmas
+transições, passador/teclado, vídeo sem travar) e adiciona: painel do apresentador com cronômetro por slide e
+ritmo, grade de slides, reinício; narrações padronizadas (Gemini TTS, pt-BR) sincronizadas por fala; áudio do
+depoimento tratado; legendas e notas explicativas de siglas sobre os vídeos; radar de detecção na capa;
+fontes embutidas (funciona sem internet).
+
+**Publicação (continua protegida):** use `tools/build_v12.py`, que embute `assets/` **e** `midia/`
+(vídeos, narrações, roteiros/legendas) no HTML e cifra no mesmo formato `RDR1` (AES-256-GCM, PBKDF2 600.000).
+O `tools/encrypt.py` antigo **não** serve para a V12.3 (não embute `midia/` nem o resolvedor de mídia).
+
+```
+python tools/build_v12.py CAMINHO/Radar-Unimed-V12.3-Correcoes docs/payload.bin
+```
+
+Digite a mesma senha já distribuída (pedida no terminal, nunca gravada) e envie **somente** `docs/payload.bin`.
+
+**Telão no site protegido:** a apresentação roda em iframe isolado (`sandbox` sem `allow-same-origin`), então
+`docs/index.html` abre a janela do telão com o mesmo conteúdo já descriptografado e retransmite as mensagens de
+sincronia entre as duas janelas. Permita pop-ups no navegador do apresentador.
+Limitação: recarregar (F5) a janela do telão no site protegido a deixa em branco — feche e clique de novo em
+"Abrir telão".
+
+Testado localmente com servidor HTTP e senha de teste: descriptografia, 8 imagens, fontes, 3 vídeos com
+narração/roteiros/legendas, notas, telão aberto pela página de acesso, sincronia nos dois sentidos.

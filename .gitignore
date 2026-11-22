@@ -20,3 +20,12 @@ password*
 *.key
 *.pem
 # docs/payload.bin is the only encrypted content that may be published.
+# V12.3: media folders and narration/audio files must never be committed in clear
+midia/
+*.mp3
+*.wav
+*.m4a
+*.ogg
+*.webm
+*.m4v
+roteiro*.json
