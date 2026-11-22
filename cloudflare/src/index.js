@@ -12,8 +12,10 @@ export default {
   if(u.pathname==="/health")return reply({ok:true,name:"radar-live",content:"not hosted"});
   if(u.pathname==="/join"&&req.method==="GET")return new Response(AUDIENCE,{headers:{...cors,"content-type":"text/html;charset=utf-8","content-security-policy":"default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; connect-src https: wss:; img-src data:"}});
   if(u.pathname==="/api/session"&&req.method==="POST"){
-    if(!env.RADAR_LIVE_HOST_KEY||env.RADAR_LIVE_HOST_KEY.length<24)return reply({error:"Host key not configured"},503);
-    if(!await same((req.headers.get("authorization")||"").replace(/^Bearer /i,""),env.RADAR_LIVE_HOST_KEY))return reply({error:"Not authorized"},403);
+    // tolerate copy/paste noise in the dashboard secret: surrounding spaces, line breaks, quotes or a trailing comma
+    const hostKey=String(env.RADAR_LIVE_HOST_KEY||"").trim().replace(/^["']+|["',;\s]+$/g,"");
+    if(hostKey.length<24)return reply({error:"Host key not configured"},503);
+    if(!await same((req.headers.get("authorization")||"").replace(/^Bearer /i,"").trim(),hostKey))return reply({error:"Not authorized"},403);
     const room=crypto.randomUUID(),viewer=rand(24),host=rand(24);
     const obj=env.RADAR_ROOMS.get(env.RADAR_ROOMS.idFromName(room));
     const initialized=await obj.fetch(new Request("https://internal.radar/init",{method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify({viewerHash:await digest(viewer),hostHash:await digest(host),expires:Date.now()+TTL})}));
