@@ -44,6 +44,14 @@ def main():
     if head < 0:
         raise SystemExit('index.html sem <head>.')
     html = html[:head + 6] + '<script>window.RADAR_EMBED=' + json.dumps(embed, separators=(',', ':')) + ';</script>' + html[head + 6:]
+    # Radar Live (QR on the cover): the local config with the presenter key goes ONLY inside the encrypted document
+    cfg = src / 'radar-live-config.js'
+    tag = '<script src="radar-live-config.js"></script>'
+    if cfg.is_file():
+        html = html.replace(tag, '<script>' + cfg.read_text(encoding='utf-8').replace('</script', '<\\/script') + '</script>', 1)
+        print('  + radar-live-config.js (Radar Live automático, apenas dentro do arquivo cifrado)')
+    else:
+        html = html.replace(tag, '', 1)
     print(f'{len(embed)} arquivos embutidos ({total/1e6:.1f} MB) · documento final {len(html)/1e6:.1f} MB')
 
     secret = os.environ.get('RADAR_PAYLOAD_PASSWORD')          # only for automated local tests

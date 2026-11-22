@@ -29,3 +29,6 @@ midia/
 *.webm
 *.m4v
 roteiro*.json
+# Radar Live presenter key (local only)
+radar-live-config*.js
+.dev.vars
